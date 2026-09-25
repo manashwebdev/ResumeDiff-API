@@ -5,22 +5,12 @@ const compareRouter = require("./src/routes/compare");
 const app = express();
 const PORT = process.env.PORT || 5050;
 
-const allowedOrigins = (process.env.CORS_ORIGIN || "http://localhost:5173")
-  .split(",")
-  .map((o) => o.trim());
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
+    credentials: true,
   })
 );
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
